@@ -1,13 +1,16 @@
 /**
  * Created Sep 28, 2020 by brain
  */
-package com.oceansfourteenth.pet_owners.model;
+package com.oceansfourteenth.petowners.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+
+import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
@@ -16,33 +19,23 @@ import lombok.Data;
  *
  */
 @Data
+@Component
 public class Owner {
-	
-	public static final List<Owner> owners = new ArrayList<>();
-	
-	@Positive
+
+	@PositiveOrZero
 	private long id;
-	
+
 	/**
 	 * Owner's name
 	 */
 	@NotEmpty
 	private String name;
-	
+
+	@NotNull
 	private List<Pet> pets;
-	
+
 	public Owner() {
 		super();
-		owners.add(this);
-		this.setId(owners.size());
+		pets = new ArrayList<>();
 	}
-	
-	public List<Pet> getPets() {
-		if (pets == null) {
-			pets = new ArrayList<>();
-		}
-		
-		return pets;
-	}
-	
 }
