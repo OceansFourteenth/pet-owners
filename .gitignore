@@ -1,0 +1,10 @@
+# IDE Configuration
+# Eclipse
+.project
+.springBeans
+.settings
+.classpath
+
+# Release
+/target/
+/bin/
