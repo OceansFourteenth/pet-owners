@@ -37,6 +37,7 @@ public class OwnerServiceImpl implements IOwnerService {
 
 	@Override
 	public Optional<Owner> createOwner(String name) {
+		validateName(name);
 		Owner owner = new Owner();
 		owner.setId(owners.size());
 		owner.setName(name);
@@ -44,8 +45,17 @@ public class OwnerServiceImpl implements IOwnerService {
 		return Optional.ofNullable(owner);
 	}
 
+	/**
+	 * @param name
+	 */
+	private void validateName(String name) {
+		if (name == null || name.isEmpty())
+			throw new IllegalArgumentException("Invalid name given: " + name);
+	}
+
 	@Override
 	public Optional<Owner> createOwner(Owner newOwner) {
+		validateName(newOwner.getName());
 		newOwner.setId(owners.size());
 		owners.add(newOwner);
 		return Optional.ofNullable(newOwner);
