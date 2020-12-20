@@ -50,7 +50,7 @@ public class OwnerServiceImpl implements IOwnerService {
 	 * @param name
 	 */
 	private void validateName(String name) {
-		if(StringUtils.isBlank(name))
+		if (StringUtils.isBlank(name))
 			throw new IllegalArgumentException("Invalid name given: " + name);
 	}
 

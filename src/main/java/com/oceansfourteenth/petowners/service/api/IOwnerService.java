@@ -43,7 +43,7 @@ public interface IOwnerService {
 	/**
 	 * Creates and saves an {@link Owner} with the given values.
 	 * 
-	 * @param newOwner	An Owner with the values to be used
+	 * @param newOwner An Owner with the values to be used
 	 * @return The newly created {@link Owner}
 	 * @throws IllegalArgumentException if the given {@link Owner} is invalid
 	 */
