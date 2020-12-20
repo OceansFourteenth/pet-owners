@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.oceansfourteenth.petowners.model.Owner;
@@ -49,7 +50,7 @@ public class OwnerServiceImpl implements IOwnerService {
 	 * @param name
 	 */
 	private void validateName(String name) {
-		if (name == null || name.isEmpty())
+		if(StringUtils.isBlank(name))
 			throw new IllegalArgumentException("Invalid name given: " + name);
 	}
 
