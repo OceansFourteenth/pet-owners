@@ -6,6 +6,7 @@ package com.oceansfourteenth.petowners.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
@@ -23,15 +24,17 @@ import lombok.Data;
 public class Owner {
 
 	@PositiveOrZero
+	@NotNull
 	private long id;
 
 	/**
 	 * Owner's name
 	 */
 	@NotEmpty
+	@NotNull
 	private String name;
 
-	@NotNull
+	@Valid
 	private List<Pet> pets;
 
 	public Owner() {

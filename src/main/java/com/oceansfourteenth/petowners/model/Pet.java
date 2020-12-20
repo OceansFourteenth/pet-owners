@@ -17,6 +17,7 @@ public class Pet {
 	/**
 	 * The pet's name
 	 */
+	@NotNull
 	@NotEmpty
 	private String name;
 
