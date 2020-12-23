@@ -11,6 +11,8 @@ import com.oceansfourteenth.petowners.extensions.swagger.ApiModelPropertyDescrip
 import lombok.Data;
 
 /**
+ * A pet belonging to an owner.
+ * 
  * @author OceansFourteenth
  *
  */
