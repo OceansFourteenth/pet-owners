@@ -13,6 +13,8 @@ import javax.validation.constraints.PositiveOrZero;
 
 import org.springframework.stereotype.Component;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -21,10 +23,12 @@ import lombok.Data;
  */
 @Data
 @Component
+@ApiModel(description = "The base object. Represents a pet owner.")
 public class Owner {
 
 	@PositiveOrZero
 	@NotNull
+	@ApiModelProperty(value = "The owner's unique identifier.", required = true)
 	private long id;
 
 	/**
@@ -32,9 +36,12 @@ public class Owner {
 	 */
 	@NotEmpty
 	@NotNull
+	@ApiModelProperty(value = "The owner's name.", required = true)
 	private String name;
 
 	@Valid
+	@NotNull
+//	@ApiModelProperty("A list of the owner's pets.")
 	private List<Pet> pets;
 
 	public Owner() {
