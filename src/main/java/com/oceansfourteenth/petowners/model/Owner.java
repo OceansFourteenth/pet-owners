@@ -1,5 +1,7 @@
 /**
- * Created Sep 28, 2020 by brain
+ * Created Sep 28, 2020
+ *
+ * Licensed at https://github.com/OceansFourteenth/pet-owners.git/LICENSE.md
  */
 package com.oceansfourteenth.petowners.model;
 
@@ -13,8 +15,9 @@ import javax.validation.constraints.PositiveOrZero;
 
 import org.springframework.stereotype.Component;
 
+import com.oceansfourteenth.petowners.extensions.swagger.ApiModelPropertyDescription;
+
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -28,7 +31,7 @@ public class Owner {
 
 	@PositiveOrZero
 	@NotNull
-	@ApiModelProperty(value = "The owner's unique identifier.", required = true)
+	@ApiModelPropertyDescription("The owner's unique identifier.")
 	private long id;
 
 	/**
@@ -36,12 +39,12 @@ public class Owner {
 	 */
 	@NotEmpty
 	@NotNull
-	@ApiModelProperty(value = "The owner's name.", required = true)
+	@ApiModelPropertyDescription("The owner's name")
 	private String name;
 
 	@Valid
 	@NotNull
-//	@ApiModelProperty("A list of the owner's pets.")
+	@ApiModelPropertyDescription("A list of the owners pets")
 	private List<Pet> pets;
 
 	public Owner() {
