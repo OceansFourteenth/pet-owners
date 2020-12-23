@@ -46,12 +46,27 @@ public class OwnerController {
 	@PostMapping
 	public Owner createOwner(@RequestBody @Valid Owner newOwner) {
 		log.info("POST new owner: {}", newOwner);
-		return ownerService.createOwner(newOwner)
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+		try {
+			return ownerService.createOwner(newOwner)
+					.orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
+		} catch (IllegalArgumentException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Owner", e);
+		}
+	}
+
+	@PostMapping("{name}")
+	public Owner createOwner(@PathVariable("name") String name) {
+		log.info("POST new owner by name: {}", name);
+		try {
+			return ownerService.createOwner(name)
+					.orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
+		} catch (IllegalArgumentException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Name", e);
+		}
 	}
 
 	@GetMapping("{id}")
-	public Owner getOwnerById(@PathVariable("id") @NotNull @PositiveOrZero long id) throws Exception {
+	public Owner getOwnerById(@PathVariable("id") @NotNull @PositiveOrZero long id) {
 		log.info("GET owner by id: {}", id);
 		return ownerService.getOwner(id)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Owner not found with given id"));
