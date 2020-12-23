@@ -15,6 +15,9 @@ import springfox.documentation.spi.schema.contexts.ModelPropertyContext;
 import springfox.documentation.swagger.common.SwaggerPluginSupport;
 
 /**
+ * Adds descriptions to properties annotated with
+ * {@link ApiModelPropertyDescription}
+ * 
  * @author OceansFourteenth
  *
  */
@@ -29,7 +32,8 @@ public class ApiModelPropertyDescriptionAnnotationPlugin implements ModelPropert
 
 	@Override
 	public void apply(ModelPropertyContext context) {
-		Optional<ApiModelPropertyDescription> description = Validators.annotationFromBean(context, ApiModelPropertyDescription.class);
+		Optional<ApiModelPropertyDescription> description = Validators.annotationFromBean(context,
+				ApiModelPropertyDescription.class);
 		if (description.isPresent()) {
 			context.getSpecificationBuilder().description(description.get().value());
 		}
