@@ -24,7 +24,7 @@ public class SpringfoxConfig {
 	public Docket api() {
 		return new Docket(DocumentationType.OAS_30)
 				.select()
-				.apis(RequestHandlerSelectors.any())
+				.apis(RequestHandlerSelectors.basePackage("com.oceansfourteenth.petowners.controller"))
 				.paths(PathSelectors.any())
 				.build();
 	}

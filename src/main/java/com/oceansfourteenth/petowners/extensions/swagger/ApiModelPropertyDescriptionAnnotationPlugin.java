@@ -22,7 +22,7 @@ import springfox.documentation.swagger.common.SwaggerPluginSupport;
  *
  */
 @Component
-@Order(SwaggerPluginSupport.SWAGGER_PLUGIN_ORDER)
+@Order(SwaggerPluginSupport.SWAGGER_PLUGIN_ORDER + 2500)
 public class ApiModelPropertyDescriptionAnnotationPlugin implements ModelPropertyBuilderPlugin {
 
 	@Override
