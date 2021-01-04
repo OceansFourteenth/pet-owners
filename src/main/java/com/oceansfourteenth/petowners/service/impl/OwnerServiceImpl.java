@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Service;
 
 import com.oceansfourteenth.petowners.model.Owner;
 import com.oceansfourteenth.petowners.service.api.IOwnerService;
@@ -17,7 +16,6 @@ import com.oceansfourteenth.petowners.service.api.IOwnerService;
  * @author OceansFourteenth
  *
  */
-@Service("ownerService")
 public class OwnerServiceImpl implements IOwnerService {
 
 	private static final List<Owner> owners = new ArrayList<>();
@@ -40,7 +38,7 @@ public class OwnerServiceImpl implements IOwnerService {
 	public Optional<Owner> createOwner(String name) {
 		validateName(name);
 		Owner owner = new Owner();
-		owner.setId(owners.size());
+		owner.setId((long) owners.size());
 		owner.setName(name);
 		owners.add(owner);
 		return Optional.ofNullable(owner);
@@ -57,7 +55,7 @@ public class OwnerServiceImpl implements IOwnerService {
 	@Override
 	public Optional<Owner> createOwner(Owner newOwner) {
 		validateName(newOwner.getName());
-		newOwner.setId(owners.size());
+		newOwner.setId((long) owners.size());
 		owners.add(newOwner);
 		return Optional.ofNullable(newOwner);
 	}
