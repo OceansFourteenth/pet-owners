@@ -10,31 +10,30 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
 
 import com.oceansfourteenth.petowners.model.Owner;
+import com.oceansfourteenth.petowners.repository.mongodb.OwnerMongoRepository;
 import com.oceansfourteenth.petowners.service.api.IOwnerService;
 
 /**
  * @author OceansFourteenth
  *
  */
-public class OwnerServiceMongoTemplateImpl implements IOwnerService {
-
+@Service("ownerService")
+public class OwnerServiceMongoRepositoryImpl implements IOwnerService {
+	
 	@Autowired
-	private MongoTemplate mongoTemplate;
+	private OwnerMongoRepository repository;
 
 	@Override
 	public Optional<List<Owner>> getOwners() {
-		return Optional.ofNullable(mongoTemplate.findAll(Owner.class));
+		return Optional.ofNullable(repository.findAll());
 	}
 
 	@Override
 	public Optional<Owner> getOwner(long id) {
-		Query query = new Query(Criteria.where("_id").is(id));
-		return Optional.ofNullable(mongoTemplate.findOne(query, Owner.class));
+		return repository.findById(id);
 	}
 
 	@Override
@@ -46,8 +45,8 @@ public class OwnerServiceMongoTemplateImpl implements IOwnerService {
 
 	@Override
 	public Optional<Owner> createOwner(@Valid Owner newOwner) throws IllegalArgumentException {
-		newOwner.setId(mongoTemplate.count(new Query(), Owner.class) + 1);
-		return Optional.ofNullable(mongoTemplate.insert(newOwner));
+		newOwner.setId(repository.count() + 1);
+		return Optional.ofNullable(repository.save(newOwner));
 	}
 
 }
