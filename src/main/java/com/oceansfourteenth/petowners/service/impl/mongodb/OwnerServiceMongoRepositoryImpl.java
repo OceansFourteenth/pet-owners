@@ -24,16 +24,16 @@ import com.oceansfourteenth.petowners.service.api.IOwnerService;
 public class OwnerServiceMongoRepositoryImpl implements IOwnerService {
 	
 	@Autowired
-	private OwnerMongoRepository repository;
+	private OwnerMongoRepository ownerMongoRepository;
 
 	@Override
 	public Optional<List<Owner>> getOwners() {
-		return Optional.ofNullable(repository.findAll());
+		return Optional.ofNullable(ownerMongoRepository.findAll());
 	}
 
 	@Override
 	public Optional<Owner> getOwner(long id) {
-		return repository.findById(id);
+		return ownerMongoRepository.findById(id);
 	}
 
 	@Override
@@ -45,8 +45,8 @@ public class OwnerServiceMongoRepositoryImpl implements IOwnerService {
 
 	@Override
 	public Optional<Owner> createOwner(@Valid Owner newOwner) throws IllegalArgumentException {
-		newOwner.setId(repository.count() + 1);
-		return Optional.ofNullable(repository.save(newOwner));
+		newOwner.setId(ownerMongoRepository.count() + 1);
+		return Optional.ofNullable(ownerMongoRepository.save(newOwner));
 	}
 
 }
